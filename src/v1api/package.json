@@ -1,0 +1,15 @@
+{
+  "name": "v1api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "v1api.js",
+  "scripts": {
+    "express": "node v1api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

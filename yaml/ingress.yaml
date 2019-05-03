@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /api/$1
+spec:
+  rules:
+  - host: node.ingress.routing.cpet.shoot.canary.k8s-hana.ondemand.com
+    http:
+      paths:
+      - path: /api/v1/(.*)$ #everything after "api/v1/" will be send as a parameter to the rewrite-target
+        backend:
+          serviceName: v1api-svc
+          servicePort: 80
+      - path: /api/v2/(.*)$ #everything after "/api/v2/" will be send as a parameter to the rewrite-target
+        backend:
+          serviceName: v2api-svc
+          servicePort: 80

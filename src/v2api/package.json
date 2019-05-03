@@ -1,0 +1,15 @@
+{
+  "name": "v2api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "v2api.js",
+  "scripts": {
+    "express": "node v2api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

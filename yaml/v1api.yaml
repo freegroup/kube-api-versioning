@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v1api
+  labels:
+    app: v1api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: v1api
+  template:
+    metadata:
+      labels:
+        app: v1api
+    spec:
+      containers:
+      - name: v1api-c
+        image: dev070555/v1api-test:v1.0
+        command: ['npm', 'run', 'express']
+        ports:
+        - name: v1api-port
+          containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: v1api-svc
+  labels:
+    app: v1api
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: v1api-port
+  selector:
+    app: v1api
+  type: ClusterIP
