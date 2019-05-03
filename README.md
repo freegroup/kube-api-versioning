@@ -1,6 +1,6 @@
 # kube-api-versioning
 ## Usage
-1. Replace `<GARDENER-CLUSTER>.<GARDENER-PROJECT>` accordingly and deploy the yaml files.
+1. Replace in the ingress file `<GARDENER-CLUSTER>.<GARDENER-PROJECT>` accordingly and deploy the yaml files.
 ```
 kubectl apply -f yaml
 ```
