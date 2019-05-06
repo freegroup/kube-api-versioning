@@ -17,7 +17,7 @@ What can we learn from the versioning practices of established web API providers
 [Google](https://cloud.google.com/apis/design/versioning) comes out of the gate with a blunt affirmation 
 of numbered versioning: **Networked APIs should use Semantic Versioning.**
 
-![Teaser Image](./images/teaser.svg)
+![Teaser Image](./images/teaser.png)
 
 
 Which approach is now called **Best Practices** has evolved over time and is also shaped by the choice of 
