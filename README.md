@@ -49,10 +49,34 @@ Your API mustn't support too much versions
 
 # Enough of the long preamble...here comes the technical part.
 
-1. Replace in the ingress file `<GARDENER-CLUSTER>.<GARDENER-PROJECT>` accordingly and deploy the yaml files.
+All the work of filtering and controlling the API calls is done completely in the Ingress Definition. No additional 
+code in the backend is necessary.
+
+```YAML
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /api/$1
+spec:
+  rules:
+  - host: api.ingress.<GARDENER-CLUSTER>.<GARDENER-PROJECT>.shoot.canary.k8s-hana.ondemand.com
+    http:
+      paths:
+      - path: /api/v1/(.*)$ #everything after "api/v1/" will be send as a parameter to the rewrite-target
+        backend:
+          serviceName: v1api-svc
+          servicePort: 80
+      - path: /api/v2/(.*)$ #everything after "/api/v2/" will be send as a parameter to the rewrite-target
+        backend:
+          serviceName: v2api-svc
+          servicePort: 80
 ```
-kubectl apply -f yaml
-```
-2. Call the following URLs and you will see that the response is different.
-- api.ingress.`<GARDENER-CLUSTER>.<GARDENER-PROJECT>`.shoot.canary.k8s-hana.ondemand.com/api/v1/user
-- api.ingress.`<GARDENER-CLUSTER>.<GARDENER-PROJECT>`.shoot.canary.k8s-hana.ondemand.com/api/v2/user
+
+As you may quickly see, a bit of RegEx magic is used here to process the path according to the service and 
+remove the **version** portion before forwarding.
+
+The URL in the backend pod didn't have this version information in the URL. It's ust clean and pure REST.
+
+You can clone this repository and inspect the files in the `yaml/*` directory you the complet routing is working.
