@@ -61,7 +61,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /api/$1
 spec:
   rules:
-  - host: api.ingress.<GARDENER-CLUSTER>.<GARDENER-PROJECT>.shoot.canary.k8s-hana.ondemand.com
+  - host: app.my-server.com
     http:
       paths:
       - path: /api/v1/(.*)$ #everything after "api/v1/" will be send as a parameter to the rewrite-target
